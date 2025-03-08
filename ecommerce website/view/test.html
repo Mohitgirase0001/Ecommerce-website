@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Good Accessories</title>
+    <link rel="icon" href="C:\Users\MOHIT\Desktop\foe4\images\logo2-removebg-preview.png">
+    <style>
+        body {
+            background: url('https://images5.alphacoders.com/134/1347174.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary-color: #111315;
+            --accent-color: #c53e2f;
+            --text-color: #a83f3f;
+            --light-gray: #474c57;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgb(172, 169, 169);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            margin: 0 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Cart */
+        .cart {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            padding: 4px 8px;
+            font-size: 0.9rem;
+        }
+
+        .cart-popup {
+            position: fixed;
+            top: 20%;
+            right: 10%;
+            width: 300px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .cart-popup h3 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .cart-items {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .close-cart,
+        .buy-now {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-cart {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .buy-now {
+            background: var(--primary-color);
+            color: white;
+            margin-left: 10px;
+        }
+
+
+        /* Product Search */
+        .product-search {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #productSearch {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Product Categories */
+        .product-categories {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .category-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .category-btn:hover {
+            background: var(--accent-color);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: #fcf8f8;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(117, 99, 179, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            padding-bottom: 15px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-to-cart:hover {
+            background: #5e3443;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a href="home2.html">
+                <img src="C:\Users\MOHIT\Desktop\foe4\images\homepng.png" alt="Home" height="50">
+            </a>
+            <a href="about.html">
+                <img src="C:\Users\MOHIT\Desktop\foe4\images\about-removebg-preview.png" alt="Home" height="50">
+            </a>
+            <a href="contact.html">
+                <img src="C:\Users\MOHIT\Desktop\foe4\images\customer-service.png" alt="Home" height="50">
+            </a>
+        </div>
+        <div class="cart" onclick="toggleCart()">
+            🛒 <span class="cart-count">0</span>
+        </div>
+    </nav>
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cartPopup">
+        <h3>Your Cart</h3>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-buttons">
+            <button class="close-cart" onclick="toggleCart()">Close</button>
+            <button class="buy-now" onclick="goToPayment()">Buy Now</button>
+        </div>
+    </div>
+
+
+    <section class="products">
+        <h2 class="section-title" style="text-align: center; margin-top: 20px; color: #5b7085;">Our Home Accessories
+        </h2>
+
+        <!-- Search Bar -->
+        <div class="product-search">
+            <input type="text" id="productSearch" placeholder="Search for a product..." onkeyup="searchProducts()">
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="product-categories">
+            <button class="category-btn" onclick="filterCategory('all')">All</button>
+            <button class="category-btn" onclick="filterCategory('lighting')">Lighting</button>
+            <button class="category-btn" onclick="filterCategory('decor')">Decor</button>
+            <button class="category-btn" onclick="filterCategory('furniture')">Furniture</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <script>
+        const products = [
+            { id: 1, name: "Vintage Table Lamp", price: 8000, image: "https://m.media-amazon.com/images/I/71G+n6zdKqL._AC_UF350,350_QL80_.jpg", category: "lighting" },
+            { id: 1, name: "Vintage Table Lamp", price: 10000, image: "https://image.made-in-china.com/2f0j00nhFprmUsfSzR/Art-Deco-Stained-Glass-Tiffanylamp-Bed-Side-Large-Vintage-Luxury-Table-Lamp-WH-TTB-06-.webp", category: "lighting" },
+            { id: 1, name: "Vintage Table Lamp", price: 8000, image: "https://i.pinimg.com/736x/5f/66/29/5f662965ba072fa47e407506148feaef.jpg", category: "lighting" },
+            { id: 1, name: "Vintage Table Lamp", price: 10000, image: "https://i.pinimg.com/originals/32/e6/5a/32e65af7bfa8c56aa5a7f40984254533.jpg", category: "lighting" },
+            { id: 1, name: "digesin light", price: 8000, image: "https://m.media-amazon.com/images/I/71SWjycAvhL._AC_UF894,1000_QL80_.jpg", category: "lighting" },
+            { id: 1, name: " hanging Light", price: 10000, image: "https://asset20.ckassets.com/blog/wp-content/uploads/sites/5/2019/03/1-17.jpg", category: "lighting" },
+            { id: 1, name: "Modern Chandlier", price: 8000, image: "https://db8hgexwnviud.cloudfront.net/images/detailed/2828/81iGVXjtxBL.jpg?t=1697627590", category: "lighting" },
+            { id: 1, name: "Modern Chandlier", price: 10000, image: "https://rukminim2.flixcart.com/image/300/300/xif0q/ceiling-lamp/l/u/a/3-1-60-60-0-5-kin-5316-1-led-chandelier-modern-3-ring-led-original-imah6gfdymcwf4mm.jpeg?q=90&crop=false", category: "lighting" },
+            { id: 1, name: "Modern Chandlier", price: 8000, image: "https://m.media-amazon.com/images/I/71RH2E6g8BL._AC_UF894,1000_QL80_.jpg", category: "lighting" },
+            { id: 1, name: "Modern Chandlier", price: 10000, image: "https://image.made-in-china.com/43f34j00ksZlDVhBpFqw/Ocean-Lighting-Contemporary-Luxury-Modern-LED-Decoration-Indoor-Large-Circle-LED-Crystal-Pendant-Light.jpg", category: "lighting" },
+            { id: 1, name: "Vintage Table Lamp", price: 8000, image: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/106/MTA-177920475/leatique_classic-table-lamp-po912-_full04.jpg", category: "lighting" },
+            { id: 1, name: "Vintage Table Lamp", price: 10000, image: "https://www.clearhalo.com/cdn/shop/products/809830_533x.jpg?v=1627505304", category: "lighting" },
+            { id: 2, name: "Decorative Vase", price: 4999, image: "https://decure.in/cdn/shop/files/A_RD5495_A.jpg?v=1717595593&width=1445", category: "decor" },
+            { id: 3, name: "Wall Mirror", price: 2999, image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/mirror/y/x/f/framed-led-mirror-with-light-bathroom-wall-decor-makeup-room-original-imagzkhyrzqbhdgz.jpeg?q=90&crop=false", category: "decor" },
+            { id: 2, name: "Wall Art", price: 4999, image: "https://m.media-amazon.com/images/I/51KD3JnLISL.jpg", category: "decor" },
+            { id: 3, name: "Wall Art", price: 2999, image: "https://5.imimg.com/data5/SELLER/Default/2020/10/HR/GO/IC/114596230/hh29-wall-arts-or-decor-items.jpg", category: "decor" },
+            { id: 2, name: "Wall Art", price: 4999, image: "https://m.media-amazon.com/images/I/51wvMyV2f+S.jpg", category: "decor" },
+            { id: 3, name: "Wall Art", price: 2999, image: "https://m.media-amazon.com/images/I/71UObyqfelL._AC_UF894,1000_QL80_.jpg", category: "decor" },
+            { id: 3, name: "Wall Mirror", price: 2999, image: "https://ikiru.in/cdn/shop/files/q-z9u4veUwsLYEivFmNwN7rxRC-Q-bTG5XjNWJFz7Po_700x700.jpg?v=1739242740", category: "decor" },
+            { id: 3, name: "Wall Mirror", price: 2999, image: "https://media.homecentre.com/i/homecentre/164617240-164617240-HC20220609_01-2100.jpg?v=1?$prodimg-d-sqr-pdp$&$quality-standard$&fmt=auto", category: "decor" },
+            { id: 3, name: "Wall clock", price: 2999, image: "https://m.media-amazon.com/images/I/414BJZc5WLL.jpg", category: "decor" },
+            { id: 3, name: "Wall clock", price: 2999, image: "https://5.imimg.com/data5/ANDROID/Default/2023/8/337732889/XV/TH/QS/162085340/product-jpeg-500x500.jpg", category: "decor" },
+            { id: 2, name: "Decorative Vase", price: 4999, image: "https://www.jiomart.com/images/product/original/rvnh6blkyb/satyam-kraft-4-pcs-artificial-flower-gingko-leaves-fake-flowers-sticks-bunch-decorative-items-for-home-living-room-table-decoration-plants-and-craft-items-corner-without-vase-pot-dark-golden-product-images-orvnh6blkyb-p600073709-4-202304011856.jpg?im=Resize=(420,420)", category: "decor" },
+            { id: 2, name: "Decorative Vase", price: 4999, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJmuWWlsoUndnLVNdC-cjG32OIAeyFTlLH3ADvADBSrEbXLClYaGAUSGTpoHwllvF1kSE&usqp=CAU", category: "decor" },
+            { id: 3, name: "Modern Living Room Sofa Set ", price: 49999, image: "https://dukaan.b-cdn.net/700x700/webp/upload_file_service/c153799b-2716-4a2d-86a6-e8e4c2efc027/whatsapp-image-2023-02-19-at-11-46-23-pm.jpeg", category: "furniture" },
+            { id: 3, name: "Modern Living Room Sofa Set ", price: 49999, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH2CK6fqzkl6-MAd2OWmVEjDBiTLgcbFpoGw&s", category: "furniture" },
+            { id: 3, name: "Modern Bed  ", price: 49999, image: "https://5.imimg.com/data5/SELLER/Default/2022/6/KH/TG/YP/3009658/1a768f13043c0075ac73818a562d6ec2-500x500.jpg", category: "furniture" },
+            { id: 3, name: "Modern Bed  ", price: 49999, image: "https://i0.wp.com/woodwoon.com/wp-content/uploads/2023/02/BK0018-bed-modern-bed-design-in-pakistan-Woodwoon.webp?fit=1536%2C1024&ssl=1", category: "furniture" },
+            { id: 3, name: "chair", price: 49999, image: "https://dukaan.b-cdn.net/700x700/webp/upload_file_service/8309218e-688e-4ee4-b8c2-d0a97dd06f7d/81q02uoegil.jpg", category: "furniture" },
+            { id: 3, name: "chair", price: 49999, image: "https://m.media-amazon.com/images/I/81auU4K2FjL._AC_UF350,350_QL80_.jpg", category: "furniture" },
+            { id: 3, name: "Dining Table ", price: 49999, image: "https://m.media-amazon.com/images/I/61hX1OCerwL.jpg", category: "furniture" },
+            { id: 3, name: "Dining Table", price: 49999, image: "https://5.imimg.com/data5/SELLER/Default/2024/2/385669787/HG/PB/JP/24135102/6-seater-modern-dining-table-set.jpg", category: "furniture" },
+            { id: 3, name: "Modern Table", price: 49999, image: "https://luxonation.in/cdn/shop/files/39_-White-Faux-Marble-Console-Sofa-Table_-Modern-Entryway-Foyer-Table.webp?v=1710157781", category: "furniture" },
+            { id: 3, name: "Modern Table", price: 49999, image: "https://www.saajawat.com/cdn/shop/products/ModernCoffeeTablewithStorageinBlackCenterTablewithStainlessSteelBase_800x.webp?v=1661241680", category: "furniture" }
+        ];
+
+        let cart = [];
+        let cartCount = 0;
+
+        function renderProducts(filteredProducts = products) {
+            document.getElementById("productGrid").innerHTML = filteredProducts.map(product => `
+            <div class="product-card">
+                <a href="product-details.html?id=${product.id}">
+                    <img src="${product.image}" class="product-image">
+                </a>
+                <div class="product-info">
+                    <h3 class="product-title">
+                        <a href="product-details.html?id=${product.id}" style="text-decoration: none; color: inherit;">
+                        ${product.name}
+                        </a>
+                    </h3>
+                    <p class="product-price">$${product.price}</p>
+                    <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+                </div>
+            </div>
+        `).join('');
+        }
+
+        function addToCart(productId) {
+            let selectedProduct = products.find(p => p.id === productId);
+            cart.push(selectedProduct);
+
+            // Update cart count
+            cartCount++;
+            document.querySelector(".cart-count").textContent = cartCount;
+
+            // Update cart display
+            updateCart();
+
+            // Button feedback animation
+            const button = event.target;
+            button.textContent = "Added!";
+            button.style.background = "#27ae60";
+            setTimeout(() => {
+                button.textContent = "Add to Cart";
+                button.style.background = "";
+            }, 1000);
+        }
+
+        function updateCart() {
+            let cartItemsDiv = document.getElementById("cartItems");
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+            } else {
+                cartItemsDiv.innerHTML = cart.map(item => `
+                    <div class="cart-item">${item.name} - $${item.price}</div>
+                `).join('');
+            }
+        }
+
+        function toggleCart() {
+            let cartPopup = document.getElementById("cartPopup");
+            cartPopup.style.display = (cartPopup.style.display === "block") ? "none" : "block";
+        }
+
+        function goToPayment() {
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            sessionStorage.setItem("orderTotal", total);
+            window.location.href = "payment.html";
+        }
+
+
+        function searchProducts() {
+            let input = document.getElementById("productSearch").value.toLowerCase();
+            renderProducts(products.filter(p => p.name.toLowerCase().includes(input)));
+        }
+
+        function filterCategory(category) {
+            renderProducts(category === "all" ? products : products.filter(p => p.category === category));
+        }
+
+        document.addEventListener("DOMContentLoaded", renderProducts);
+    </script>
+</body>
+
+</html>

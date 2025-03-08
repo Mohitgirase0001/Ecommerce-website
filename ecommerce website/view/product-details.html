@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        body {
+            background: url('https://png.pngtree.com/thumb_back/fw800/background/20231005/pngtree-elegant-white-room-decor-featuring-a-stunning-purple-sofa-lavender-lamp-image_13584035.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .product-container {
+            max-width: 700px;
+            margin: auto;
+            display: flex;
+            gap: 80px;
+            border: 1px solid #b93030;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .image-gallery {
+            width: 40%;
+        }
+        .image-gallery img {
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.05);
+        }
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .thumbnail:hover, .thumbnail.active {
+            border: 2px solid #c53e2f;
+        }
+        .product-info {
+            width: 60%;
+            text-align: left;
+        }
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-size: 20px;
+            color: #c53e2f;
+            font-weight: bold;
+        }
+        .reviews {
+            margin-top: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-to-cart { background: #141516; color: white; }
+        .buy-now { background: #c53e2f; color: white; }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <div class="image-gallery">
+            <img id="mainImage" src="" alt="Product Image">
+            <div class="thumbnail-container" id="thumbnails"></div>
+        </div>
+        <div class="product-info">
+            <h2 id="productTitle" class="product-title"></h2>
+            <p id="productPrice" class="product-price"></p>
+            <p id="productDescription"></p>
+            <div class="buttons">
+                <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                <button class="buy-now" onclick="buyNow()">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            { 
+                id: 1, 
+                name: "Vintage Table Lamp", 
+                price: 8000, 
+                images: [
+                    "https://m.media-amazon.com/images/I/71G+n6zdKqL._AC_UF350,350_QL80_.jpg",
+                    "https://image.made-in-china.com/2f0j00nhFprmUsfSzR/Art-Deco-Stained-Glass-Tiffanylamp-Bed-Side-Large-Vintage-Luxury-Table-Lamp-WH-TTB-06-.webp",
+                    "https://i.pinimg.com/736x/5f/66/29/5f662965ba072fa47e407506148feaef.jpg"
+                ], 
+                
+            }
+        ];
+
+        function getProductDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get("id"));
+
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                document.getElementById("mainImage").src = product.images[0];
+                document.getElementById("productTitle").textContent = product.name;
+                document.getElementById("productPrice").textContent = `$${product.price}`;
+                document.getElementById("productDescription").textContent = product.description;
+                
+                let thumbnails = "";
+                product.images.forEach((img, index) => {
+                    thumbnails += `<img src="${img}" class="thumbnail" onclick="changeImage('${img}')">`;
+                });
+                document.getElementById("thumbnails").innerHTML = thumbnails;
+            } else {
+                document.body.innerHTML = "<h2>Product not found</h2>";
+            }
+        }
+
+        function changeImage(imgSrc) {
+            document.getElementById("mainImage").src = imgSrc;
+        }
+
+        function addToCart() {
+            alert("Product added to cart!");
+        }
+
+        function buyNow() {
+            alert("Proceeding to checkout...");
+        }
+
+        getProductDetails();
+    </script>
+</body>
+</html>

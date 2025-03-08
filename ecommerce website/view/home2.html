@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Home Good Accessories</title>
+    <link rel = "icon" href="C:\Users\MOHIT\Desktop\foe4\images\logo2-removebg-preview.png">
+    <style>
+        body{
+            background: url('https://static.vecteezy.com/system/resources/previews/023/132/586/non_2x/stylish-interior-design-of-living-room-with-modern-mint-sofa-wooden-console-cube-coffee-table-lamp-plant-mock-up-poster-frame-decoration-and-elegant-accessories-in-home-decor-ai-generated-photo.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #1c1c1a;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-gray: #625d5d;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgb(172, 170, 170);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 30px;
+            align-content: center;
+      
+        }
+
+        .logo {
+            font-size: 2pc;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            text-align: left;
+            width: 65%;
+            
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            justify-content: right;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(151, 125, 125, 0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #c43525;
+            
+        }
+
+        /* Products Section */
+        .products {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .product-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #5e3443;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: var(--light-gray);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="C:\Users\MOHIT\Desktop\foe4\images\logo2-removebg-preview.png" height="50" >
+                 Home Good Accessories
+            </div>
+            <div class="nav-links">
+                <a href="home2.html">
+                    <img src="C:\Users\MOHIT\Desktop\foe4\images\homepng.png" alt="Home" height="30">
+                </a>
+                <a href="test.html">
+                    <img src="C:\Users\MOHIT\Desktop\foe4\images\product-removebg-preview.png" alt="Home" height="30">
+                </a>
+                <a href="about.html">
+                    <img src="C:\Users\MOHIT\Desktop\foe4\images\about-removebg-preview.png" alt="Home" height="30">
+                </a>
+                <a href="contact.html">
+                    <img src="C:\Users\MOHIT\Desktop\foe4\images\customer-service.png" alt="Home" height="30">
+                </a>
+                <a href="login.html">
+                    <img src="C:\Users\MOHIT\Desktop\foe4\images\login.png" alt="Login" height="25">
+                </a>
+                <a href="signup.html">
+                    <img src="C:\Users\MOHIT\Desktop\foe4\images\signup2.png" alt="Signup" height="25">
+                </a>
+                <a href="feedback.html">
+                    <img src="C:\Users\MOHIT\Desktop\foe4\images\feedback-removebg-preview.png" alt="Signup" height="25">
+                </a>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒
+                <span class="cart-count">0</span>
+                
+            </div>
+        </div>       
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <marquee behavior="scroll" direction="left" scrollamount="70" scrolldelay="500"><img src="C:\Users\MOHIT\Desktop\foe4\images\hom1.webp" height="450px">   <img src="C:\Users\MOHIT\Desktop\foe4\images\home3.avif" height="450px">  <img src="C:\Users\MOHIT\Desktop\foe4\images\home4.avif" height="450px"><img src="C:\Users\MOHIT\Desktop\foe4\images\home5.avif" height="450px"> <img src="C:\Users\MOHIT\Desktop\foe4\images\home6.avif" height="450px"><img src="C:\Users\MOHIT\Desktop\foe4\images\home7.jpg" height="450px"> </marquee>
+            <button class="cta-button">Shop Now</button>
+        </div>
+    </section>
+
+    <section class="products">
+        <h2 class="section-title">Most selling Products</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2 class="section-title">Subscribe to Our Newsletter</h2>
+        <p>Get updates about new products and special offers!</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email">
+            <button type="submit" class="cta-button">Subscribe</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We bring you the finest selection of home accessories to enhance your living space.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home2.html">Home</a></li>
+                    <li><a href="test.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: info@homechic.com</li>
+                    <li>Phone: (555) 123-4567</li>
+                    <li>Address: 123 Decor Street Mumbai</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: 1,
+                name: "Vintage Table Lamp",
+                price: 8000,
+                image: "https://m.media-amazon.com/images/I/71G+n6zdKqL._AC_UF350,350_QL80_.jpg"
+            },
+            {
+                id: 2,
+                name: "Decorative Vase",
+                price: 4999,
+                image: "https://decure.in/cdn/shop/files/A_RD5495_A.jpg?v=1717595593&width=1445"
+            },
+            {
+                id: 3,
+                name: "Wall Mirror",
+                price: 2999,
+                image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/mirror/y/x/f/framed-led-mirror-with-light-bathroom-wall-decor-makeup-room-original-imagzkhyrzqbhdgz.jpeg?q=90&crop=false"
+            },
+            {
+                id: 4,
+                name: "Throw Pillows Set",
+                price: 999,
+                image: "https://romee.in/cdn/shop/files/DKTCRF001.jpg?v=1725430506"
+            },
+            {
+                id: 5,
+                name: "Ceramic Plant Pot",
+                price: 2599,
+                image: "https://i.koloapp.in/tr:n-hd/323ec7ed-9509-7e7a-1c1c-2969d2763433"
+            },
+            {
+                id: 6,
+                name: "Wall Clock",
+                price: 5999,
+                image: "https://m.media-amazon.com/images/I/61Hqf+3LkRL._AC_UF894,1000_QL80_.jpg"
+            },
+            {
+                id: 7,
+                name: "Vintage Sofa",
+                price: 59999,
+                image: "https://www.sofaturkey.com/wp-content/uploads/Agah-Luxury-Classic-Sofa-Set-Avantgarde-6.webp"
+            },
+            {
+                id: 8,
+                name: "Vintage Table",
+                price: 9999,
+                image: "https://images.jdmagicbox.com/quickquotes/images_main/living-room-antique-table-386512192-2lyjl.jpeg"
+            }
+
+        ];
+
+        // Cart functionality
+        let cartCount = 0;
+        const cartCountElement = document.querySelector('.cart-count');
+
+        // Function to render products
+        function renderProducts() {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-price">$${product.price}</p>
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Function to add items to cart
+        function addToCart(productId) {
+            cartCount++;
+            cartCountElement.textContent = cartCount;
+            
+            // Animation for button
+            const button = event.target;
+            button.textContent = "Added!";
+            button.style.background = "#27ae60";
+            setTimeout(() => {
+                button.textContent = "Add to Cart";
+                button.style.background = "";
+            }, 1000);
+        }
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartCount = document.querySelector('.cart-count');
+
+            cartCount.textContent = cart.length;
+            
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>₹${item.price}</p>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})">Remove</button>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            cartTotal.innerHTML = `<h3>Total: ₹${total}</h3>`;
+        }
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartDisplay();
+        }
+
+        function toggleCart() {
+            const cartModal = document.getElementById('cartModal');
+            cartModal.classList.toggle('open');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            alert('Thank you for your purchase!');
+            cart = [];
+            updateCartDisplay();
+            toggleCart();
+        }
+
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            if (email) {
+                alert('Thank you for subscribing!');
+                e.target.querySelector('input').value = '';
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

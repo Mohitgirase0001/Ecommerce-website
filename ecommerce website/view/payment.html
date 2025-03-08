@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | Home Good Accessories</title>
+    <link rel="icon" href="logo2.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background: #f8f9fa; 
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh;
+            background: url('https://png.pngtree.com/thumb_back/fh260/background/20241016/pngtree-abstract-wireframe-of-a-digital-online-payment-concept-with-a-hand-image_16397758.jpg') no-repeat center center fixed;
+            background-size: cover; 
+        }
+        
+        .payment-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 { color: #2c3e50; margin-bottom: 20px; }
+        .order-summary { text-align: left; margin-bottom: 20px; font-size: 1.1rem; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+        
+        .pay-button {
+            width: 100%;
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .pay-button:hover { background: #1a252f; }
+        .back-button { display: block; text-align: center; margin-top: 10px; color: #2c3e50; text-decoration: none; }
+        .back-button:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="payment-container">
+        <h2>Payment Details</h2>
+        <div class="order-summary">
+            <strong>Order Total:</strong> $<span id="orderTotal">0</span>
+        </div>
+        <form id="paymentForm">
+            <input type="text" placeholder="Cardholder Name" required>
+            <input type="number" placeholder="Card Number" required>
+            <input type="number" placeholder="Expiry Date (MMYY)" required>
+            <input type="number" placeholder="CVV" required>
+            <button type="submit" class="pay-button">Confirm Payment</button>
+        </form>
+        <a href="test.html" class="back-button">← Back to Products</a>
+    </div>
+
+    <script>
+        // Get order total from session storage (set in products.html)
+        document.getElementById("orderTotal").innerText = sessionStorage.getItem("orderTotal") || "0";
+
+        // Simulate payment confirmation
+        document.getElementById("paymentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Payment Successful! Thank you for your purchase.");
+            sessionStorage.clear();
+            window.location.href = "home2.html"; // Redirect to home page
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel = "icon" href="logo2-removebg-preview.png">
+  <style>
+    body {
+      background: url('back3.jpg') no-repeat center center fixed;
+      background-size: cover; 
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #807d7d;
+      color: rgb(19, 18, 18);
+      padding: 10px;
+      text-align: center;
+      height: 50px;
+    }
+    .logo {
+      font-size: 2pc;
+      font-weight: bold;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      text-align: left;
+      width: 65%;
+            
+    }
+    
+    button {
+      background-color: #080909;
+      color: rgb(249, 244, 244);
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0dcd53;
+    }
+
+    #productList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+
+    .product {
+      width: 200px;
+      padding: 15px;
+      background-color: rgb(71, 68, 68);
+      border: 1px solid #df3232;
+      margin: 10px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-decoration-color: #f7f7f7;
+      color: #f7f7f7;
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+    }
+
+    .product h3 {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cart-modal-content {
+      background-color: white;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .cart-modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    #cartItems {
+      text-align: left;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      margin: 10px 0;
+    }
+
+    .reviews {
+      margin-top: 10px;
+      color: #f7f7f7;
+    }
+
+    .reviews h4 {
+      margin-bottom: 10px;
+      color: #f7f7f7;
+     
+    }
+
+    .review-item {
+      margin-bottom: 10px;
+    }
+
+    .review-form input,
+    .review-form textarea {
+      width:auto;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    .review-form button {
+      background-color: #0f1011;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .review-form button:hover {
+      background-color: #09b559;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo2-removebg-preview.png" height="50" >
+       Home Good Accessories
+    </div>
+    
+    <button id="viewCartButton">View Cart</button>
+  </header>
+
+  <main>
+    <div id="productList">
+      <!-- Products will be loaded here -->
+    </div>
+  </main>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+      <div>
+        <strong>Total: $<span id="totalPrice">0</span></strong>
+      </div>
+      <button id="closeCartButton">Close Cart</button>
+    </div>
+  </div>
+
+  <script>
+    // Mock data for products
+    const products = [
+      { id: 'p1', name: 'Sofa', price: 299, description: 'Comfortable sofa for living room.', imageUrl: 'https://www.brabbu.com/en/inspiration-and-ideas/wp-content/uploads/2022/02/Modern-Sofas-Inspiration-for-Your-Living-Room-5.jpeg', reviews: [] },
+      { id: 'p2', name: 'Dining Table', price: 199, description: 'Modern dining table for 4 people.', imageUrl: 'https://dukaan.b-cdn.net/700x700/webp/upload_file_service/71bc75e8-e763-409b-9f7c-057b2b18e751/dining-table-d.png', reviews: [] },
+      { id: 'p3', name: 'Desk Lamp', price: 49, description: 'LED desk lamp with adjustable brightness.', imageUrl: 'https://ik.imagekit.io/achtunglabs/nLighten/wp-content/uploads/2021/12/O1CN014GoG0X1JDknzmWIP8_21212212652960995-0-cib.jpg', reviews: [] },
+      { id: 'p4', name: 'Coffee Table', price: 129, description: 'Wooden coffee table for your living room.', imageUrl: 'https://ikiru.in/cdn/shop/products/buy-center-table-wood-and-black-metal-center-table-or-coffee-table-for-living-room-by-the-home-dekor-on-ikiru-online-store-2_1052x700.jpg?v=1739198571', reviews: [] }
+    ];
+
+    // Cart to store items
+    let cart = [];
+
+    // Function to load products into the page
+    function loadProducts() {
+      const productList = document.getElementById('productList');
+
+      products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
+        productDiv.innerHTML = `
+          <img src="${product.imageUrl}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <p>$${product.price}</p>
+          <button onclick="addToCart('${product.id}')">Add to Cart</button>
+          <div class="reviews">
+            <h4>Customer Reviews</h4>
+            <div id="reviews-${product.id}">
+              ${product.reviews.length ? product.reviews.map(r => `<div class="review-item"><strong>${r.name}</strong>: ${r.feedback}</div>`).join('') : '<p>No reviews yet.</p>'}
+            </div>
+            <div class="review-form">
+              <input type="text" id="reviewName-${product.id}" placeholder="Your Name" />
+              <textarea id="reviewFeedback-${product.id}" placeholder="Your Review"></textarea>
+              <button onclick="submitReview('${product.id}')">Submit Review</button>
+            </div>
+          </div>
+        `;
+        productList.appendChild(productDiv);
+      });
+    }
+
+    // Function to add product to the cart
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        const cartItem = cart.find(item => item.product.id === productId);
+        if (cartItem) {
+          cartItem.quantity += 1;
+        } else {
+          cart.push({ product, quantity: 1 });
+        }
+        alert(`${product.name} added to the cart!`);
+      }
+    }
+
+    // Function to view the cart
+    document.getElementById('viewCartButton').addEventListener('click', () => {
+      const cartItemsContainer = document.getElementById('cartItems');
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+      } else {
+        cart.forEach(item => {
+          const itemTotal = item.product.price * item.quantity;
+          total += itemTotal;
+          const cartItemDiv = document.createElement('div');
+          cartItemDiv.classList.add('cart-item');
+          cartItemDiv.innerHTML = `
+            <p>${item.product.name} - Quantity: ${item.quantity} - Price: $${item.product.price} each - Total: $${itemTotal}</p>
+          `;
+          cartItemsContainer.appendChild(cartItemDiv);
+        });
+      }
+
+      document.getElementById('totalPrice').textContent = total.toFixed(2);
+      document.getElementById('cartModal').style.display = 'flex';
+    });
+
+    // Function to close the cart modal
+    document.getElementById('closeCartButton').addEventListener('click', () => {
+      document.getElementById('cartModal').style.display = 'none';
+    });
+
+    // Function to submit a review
+    function submitReview(productId) {
+      const name = document.getElementById(`reviewName-${productId}`).value;
+      const feedback = document.getElementById(`reviewFeedback-${productId}`).value;
+
+      if (name && feedback) {
+        const product = products.find(p => p.id === productId);
+        product.reviews.push({ name, feedback });
+
+        // Clear the form
+        document.getElementById(`reviewName-${productId}`).value = '';
+        document.getElementById(`reviewFeedback-${productId}`).value = '';
+
+        // Update the reviews display
+        const reviewsDiv = document.getElementById(`reviews-${productId}`);
+        reviewsDiv.innerHTML = product.reviews.map(r => `<div class="review-item"><strong>${r.name}</strong>: ${r.feedback}</div>`).join('');
+        alert('Thank you for your review!');
+      } else {
+        alert('Please enter both name and feedback.');
+      }
+    }
+
+    // Load products when the page is ready
+    window.onload = loadProducts;
+  </script>
+</body>
+</html>
